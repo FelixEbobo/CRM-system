@@ -1,0 +1,64 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+{%  include 'accounts/status.html' %}
+<br>
+
+<div class="row">
+	<div class="col-md-5">
+		<h5>CUSTOMERS:</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="">Create Customer</a>
+			<table class="table table-sm">
+				<tr>
+					<th>Customer</th>
+					<th>Phone</th>
+				</tr>
+
+				{% for cust in customers %}
+					<tr>
+						<td><a href="{% url 'Customer' cust.id %}"> {{cust.name}} </a></td>
+						<td> {{cust.phone}} </td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<h5>LAST 5 ORDERS</h5>
+		<hr>
+		<div class="card card-body">
+				{% comment %} <button class="btn_ord" type="button"> Create Order </button> {% endcomment %}
+				<a class='btn btn-primary btn-sm btn-block' href={% url 'CreateOrder' %}>Create order</a>
+			<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Date Orderd</th>
+					<th>Customer</th>
+					<th>Status</th>
+					<th>Update</th>
+					<th>Remove</th>
+				</tr>
+		
+				{% for order in last_orders %}
+					<tr>
+						<td>{{order.product}}</td>
+						<td>{{order.date_created}}</td>
+						<td>{{order.customer}}</td>
+						<td>{{order.status}}</td>
+						<td><a class="btn btn-sm btn-info" href='{% url 'UpdateOrder' order.id %}'>Update</a></td>
+						<td><a class="btn btn-sm btn-danger" href='{% url 'DeleteOrder' order.id %}'>Delete</a></td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<p> Are you sure you wanna delete "{{item.product}}"?
+
+<form method="POST" action="{% url 'DeleteOrder' item.id %}">
+    <a class="btn btn-warning" href="{% url 'Home' %}">Cancel</a>
+    {% csrf_token %}
+    <input class="btn btn-danger" type="submit" name="Confirm">
+</form>
+
+{% endblock content %}
